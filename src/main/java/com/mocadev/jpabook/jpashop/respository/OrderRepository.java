@@ -1,6 +1,8 @@
 package com.mocadev.jpabook.jpashop.respository;
 
 import com.mocadev.jpabook.jpashop.domain.Order;
+import com.mocadev.jpabook.jpashop.domain.OrderSearch;
+import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -24,5 +26,10 @@ public class OrderRepository {
 		return em.find(Order.class, id);
 	}
 
-//	public List<Order> findAll(OrderSearch orderSearch) {}
+	public List<Order> findAll(OrderSearch orderSearch) {
+		return em
+			.createQuery("select o  from Order o join o.member m", Order.class)
+			.setMaxResults(1000)
+			.getResultList();
+	}
 }
