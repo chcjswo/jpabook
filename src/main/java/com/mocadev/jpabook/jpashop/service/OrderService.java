@@ -4,10 +4,12 @@ import com.mocadev.jpabook.jpashop.domain.Delivery;
 import com.mocadev.jpabook.jpashop.domain.Member;
 import com.mocadev.jpabook.jpashop.domain.Order;
 import com.mocadev.jpabook.jpashop.domain.OrderItem;
+import com.mocadev.jpabook.jpashop.domain.OrderSearch;
 import com.mocadev.jpabook.jpashop.domain.item.Item;
 import com.mocadev.jpabook.jpashop.respository.ItemRepository;
 import com.mocadev.jpabook.jpashop.respository.MemberRepository;
 import com.mocadev.jpabook.jpashop.respository.OrderRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,8 +55,8 @@ public class OrderService {
 		order.cancel();
 	}
 
-//	public List<Order> findOrder(OrderSearch orderSearch) {
-//		return orderRepository.findAll(orderSearch);
-//	}
+	public List<Order> findOrder(OrderSearch orderSearch) {
+		return orderRepository.findAll(orderSearch);
+	}
 
 }
