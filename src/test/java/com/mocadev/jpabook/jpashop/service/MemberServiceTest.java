@@ -1,10 +1,10 @@
 package com.mocadev.jpabook.jpashop.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.mocadev.jpabook.jpashop.domain.Member;
 import com.mocadev.jpabook.jpashop.respository.MemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +28,7 @@ class MemberServiceTest {
 	@Test
 	public void joinTest() {
 		Member member = new Member();
-		member.setUsername("mc.jeon");
+		member.setName("mc.jeon");
 
 		Long savedId = memberService.join(member);
 
@@ -38,10 +38,10 @@ class MemberServiceTest {
 	@Test
 	public void joinExceptionTest() {
 		Member member1 = new Member();
-		member1.setUsername("jeon");
+		member1.setName("jeon");
 
 		Member member2 = new Member();
-		member2.setUsername("jeon");
+		member2.setName("jeon");
 
 		memberService.join(member1);
 
