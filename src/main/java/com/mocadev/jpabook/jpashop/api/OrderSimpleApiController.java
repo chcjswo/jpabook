@@ -5,7 +5,7 @@ import com.mocadev.jpabook.jpashop.domain.Order;
 import com.mocadev.jpabook.jpashop.domain.OrderSearch;
 import com.mocadev.jpabook.jpashop.domain.OrderStatus;
 import com.mocadev.jpabook.jpashop.respository.OrderRepository;
-import com.mocadev.jpabook.jpashop.respository.OrderSimpleQueryDtos;
+import com.mocadev.jpabook.jpashop.respository.simplequery.OrderSimpleQueryDtos;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
