@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -30,6 +32,12 @@ public abstract class Item {
 	private String name;
 	private int price;
 	private int stockQty;
+
+	private Boolean open;	// 판매 여부
+//	private List<String> regions = new ArrayList<>(); // 등록 지역
+	@Enumerated(EnumType.STRING)
+	private ItemType itemType;	// 상품 종류
+	private String deliveryCode;	// 배송 방식
 
 	@ManyToMany(mappedBy = "items")
 	private List<Category> categories = new ArrayList<>();
