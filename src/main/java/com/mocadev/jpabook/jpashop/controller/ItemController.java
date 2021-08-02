@@ -37,6 +37,7 @@ public class ItemController {
 		book.setStockQty(form.getStockQty());
 		book.setAuthor(form.getAuthor());
 		book.setIsbn(form.getIsbn());
+		book.setOpen(form.isOpen());
 
 		itemService.saveItem(book);
 		return "redirect:/";
@@ -60,6 +61,7 @@ public class ItemController {
 		form.setStockQty(item.getStockQty());
 		form.setAuthor(item.getAuthor());
 		form.setIsbn(item.getIsbn());
+		form.setOpen(form.isOpen());
 
 		model.addAttribute("form", form);
 		return "items/updateItemForm";
@@ -74,6 +76,7 @@ public class ItemController {
 		book.setStockQty(form.getStockQty());
 		book.setAuthor(form.getAuthor());
 		book.setIsbn(form.getIsbn());
+		book.setOpen(form.isOpen());
 
 		itemService.saveItem(book);
 		return "redirect:/items";

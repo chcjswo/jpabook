@@ -13,11 +13,11 @@ import lombok.Setter;
 public class BookForm {
 
 	private Long id;
-
 	private String name;
 	private int price;
 	private int stockQty;
-
 	private String author;
 	private String isbn;
+	private boolean open;
+
 }
