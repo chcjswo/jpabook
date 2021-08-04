@@ -49,6 +49,16 @@
 				</label>
 			</div>
 		</div>
+		<!-- SELECT -->
+		<div>
+			<div>배송 방식</div>
+			<select th:field="*{deliveryCode}" class="form-select">
+				<option value="">==배송 방식 선택==</option>
+				<option th:each="deliveryCode : ${deliveryCodes}" th:value="${deliveryCode.code}"
+						th:text="${deliveryCode.displayName}">FAST</option>
+			</select>
+		</div>
+		<hr class="my-4">
 		<div class="form-group">
 			<label th:for="author">저자</label>
 			<input type="text" th:field="*{author}" class="form-control" placeholder="저자를 입력하세요">

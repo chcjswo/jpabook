@@ -23,5 +23,6 @@ public class BookForm {
 	private boolean open;
 	private Map<String, String> regions;
 	private ItemType itemType;
+	private String deliveryCode;
 
 }

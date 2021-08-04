@@ -1,9 +1,11 @@
 package com.mocadev.jpabook.jpashop.controller;
 
 import com.mocadev.jpabook.jpashop.domain.item.Book;
+import com.mocadev.jpabook.jpashop.domain.item.DeliveryCode;
 import com.mocadev.jpabook.jpashop.domain.item.Item;
 import com.mocadev.jpabook.jpashop.domain.item.ItemType;
 import com.mocadev.jpabook.jpashop.service.ItemService;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,15 @@ public class ItemController {
 		return regions;
 	}
 
+	@ModelAttribute("deliveryCodes")
+	public List<DeliveryCode> deliveryCodes() {
+		List<DeliveryCode> deliveryCodes = new ArrayList<>();
+		deliveryCodes.add(new DeliveryCode("FAST", "빠른 배송"));
+		deliveryCodes.add(new DeliveryCode("NORMAL", "보통 배송"));
+		deliveryCodes.add(new DeliveryCode("SLOW", "느린 배송"));
+		return deliveryCodes;
+	}
+
 	@ModelAttribute("itemTypes")
 	public ItemType[] itemTypes() {
 		return ItemType.values();
@@ -55,6 +66,7 @@ public class ItemController {
 		book.setAuthor(form.getAuthor());
 		book.setIsbn(form.getIsbn());
 		book.setOpen(form.isOpen());
+		book.setDeliveryCode(form.getDeliveryCode());
 
 		itemService.saveItem(book);
 		return "redirect:/";
@@ -78,7 +90,8 @@ public class ItemController {
 		form.setStockQty(item.getStockQty());
 		form.setAuthor(item.getAuthor());
 		form.setIsbn(item.getIsbn());
-		form.setOpen(form.isOpen());
+//		form.setOpen(item.getOpen());
+		form.setDeliveryCode(item.getDeliveryCode());
 
 		model.addAttribute("form", form);
 		return "items/updateItemForm";
@@ -94,6 +107,7 @@ public class ItemController {
 		book.setAuthor(form.getAuthor());
 		book.setIsbn(form.getIsbn());
 		book.setOpen(form.isOpen());
+		book.setDeliveryCode(form.getDeliveryCode());
 
 		itemService.saveItem(book);
 		return "redirect:/items";
