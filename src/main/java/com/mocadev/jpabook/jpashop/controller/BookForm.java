@@ -1,5 +1,6 @@
 package com.mocadev.jpabook.jpashop.controller;
 
+import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +20,6 @@ public class BookForm {
 	private String author;
 	private String isbn;
 	private boolean open;
+	private Map<String, String> regions;
 
 }
