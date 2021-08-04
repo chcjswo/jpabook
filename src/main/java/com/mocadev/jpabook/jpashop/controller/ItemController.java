@@ -3,7 +3,9 @@ package com.mocadev.jpabook.jpashop.controller;
 import com.mocadev.jpabook.jpashop.domain.item.Book;
 import com.mocadev.jpabook.jpashop.domain.item.Item;
 import com.mocadev.jpabook.jpashop.service.ItemService;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ItemController {
 
 	private final ItemService itemService;
+
+	@ModelAttribute("regions")
+	public Map<String, String> regions() {
+		Map<String, String> regions = new LinkedHashMap<>();
+		regions.put("SEOUL", "서울");
+		regions.put("BUSAN", "부산");
+		regions.put("SUWON", "수원");
+		return regions;
+	}
 
 	@GetMapping("/items/new")
 	public String createForm(Model model) {
