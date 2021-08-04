@@ -2,6 +2,7 @@ package com.mocadev.jpabook.jpashop.controller;
 
 import com.mocadev.jpabook.jpashop.domain.item.Book;
 import com.mocadev.jpabook.jpashop.domain.item.Item;
+import com.mocadev.jpabook.jpashop.domain.item.ItemType;
 import com.mocadev.jpabook.jpashop.service.ItemService;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,6 +33,11 @@ public class ItemController {
 		regions.put("BUSAN", "부산");
 		regions.put("SUWON", "수원");
 		return regions;
+	}
+
+	@ModelAttribute("itemTypes")
+	public ItemType[] itemTypes() {
+		return ItemType.values();
 	}
 
 	@GetMapping("/items/new")

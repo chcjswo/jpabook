@@ -1,5 +1,7 @@
 package com.mocadev.jpabook.jpashop.domain.item;
 
+import lombok.Getter;
+
 /**
  * @author chcjswo
  * @version 1.0.0
@@ -7,6 +9,7 @@ package com.mocadev.jpabook.jpashop.domain.item;
  * @github https://github.com/chcjswo
  * @since 2021-08-02
  **/
+@Getter
 public enum ItemType {
 
 	BOOK("도서"), FOOD("음식"), ETC("기타");
