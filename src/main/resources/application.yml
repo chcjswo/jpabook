@@ -17,6 +17,9 @@ spring:
                 format_sql: true
                 default_batch_fetch_size: 100
 
+    messages:
+        basename: messages,config.i18n.messages
+
 logging:
     level:
         org.hibernate.SQL: debug
