@@ -18,16 +18,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author chcjswo
  * @version 1.0.0
- * @since 2020-11-26(026)
+ * @since 2021-08-09
  **/
 @Controller
 @RequiredArgsConstructor
-public class ItemController {
+@RequestMapping("/v2")
+public class ItemControllerV2 {
 
 	private final ItemService itemService;
 
@@ -57,7 +59,7 @@ public class ItemController {
 	@GetMapping("/items/new")
 	public String createForm(Model model) {
 		model.addAttribute("form", new BookForm());
-		return "items/createItemForm";
+		return "items/v2/createItemForm";
 	}
 
 	@PostMapping("/items/new")
@@ -71,7 +73,7 @@ public class ItemController {
 		if (!errors.isEmpty()) {
 			model.addAttribute("errors", errors);
 			model.addAttribute("form", form);
-			return "items/createItemForm";
+			return "items/v2/createItemForm";
 		}
 
 		Book book = new Book();
@@ -91,7 +93,7 @@ public class ItemController {
 	public String list(Model model) {
 		List<Item> items = itemService.findItems();
 		model.addAttribute("items", items);
-		return "items/itemList";
+		return "items/v2/itemList";
 	}
 
 	@GetMapping("/items/{itemId}/edit")
@@ -109,7 +111,7 @@ public class ItemController {
 		form.setDeliveryCode(item.getDeliveryCode());
 
 		model.addAttribute("form", form);
-		return "items/updateItemForm";
+		return "items/v2/updateItemForm";
 	}
 
 	@PostMapping("/items/{itemId}/edit")
