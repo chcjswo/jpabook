@@ -6,16 +6,19 @@ import com.mocadev.jpabook.jpashop.domain.item.Item;
 import com.mocadev.jpabook.jpashop.domain.item.ItemType;
 import com.mocadev.jpabook.jpashop.service.ItemService;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author chcjswo
@@ -58,7 +61,19 @@ public class ItemController {
 	}
 
 	@PostMapping("/items/new")
-	public String create(BookForm form) {
+	public String create(Model model, @ModelAttribute BookForm form, RedirectAttributes redirectAttributes) {
+		Map<String, String> errors = new HashMap<>();
+
+		if (!StringUtils.hasText(form.getName())) {
+			errors.put("itemName", "상품이름은 필수입니다.");
+		}
+
+		if (!errors.isEmpty()) {
+			model.addAttribute("errors", errors);
+			model.addAttribute("form", form);
+			return "items/createItemForm";
+		}
+
 		Book book = new Book();
 		book.setName(form.getName());
 		book.setPrice(form.getPrice());
