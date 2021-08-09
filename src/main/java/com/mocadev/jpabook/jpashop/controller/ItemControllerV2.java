@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,15 +65,15 @@ public class ItemControllerV2 {
 	}
 
 	@PostMapping("/items/new")
-	public String create(Model model, @ModelAttribute BookForm form, RedirectAttributes redirectAttributes) {
-		Map<String, String> errors = new HashMap<>();
-
+	public String create(Model model,
+						 @ModelAttribute BookForm form,
+						 BindingResult bindingResult,
+						 RedirectAttributes redirectAttributes) {
 		if (!StringUtils.hasText(form.getName())) {
-			errors.put("itemName", "상품이름은 필수입니다.");
+			bindingResult.addError(new FieldError("form", "name", "상품이름은 필수입니다."));
 		}
 
-		if (!errors.isEmpty()) {
-			model.addAttribute("errors", errors);
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("form", form);
 			return "items/v2/createItemForm";
 		}
