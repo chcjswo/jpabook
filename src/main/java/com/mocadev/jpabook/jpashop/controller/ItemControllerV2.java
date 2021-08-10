@@ -18,11 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -37,6 +35,11 @@ public class ItemControllerV2 {
 
 	private final ItemService itemService;
 	private final ItemValidator itemValidator;
+
+	@InitBinder
+	public void init(WebDataBinder dataBinder) {
+		dataBinder.addValidators(itemValidator);
+	}
 
 	@ModelAttribute("regions")
 	public Map<String, String> regions() {
@@ -67,13 +70,36 @@ public class ItemControllerV2 {
 		return "items/v2/createItemForm";
 	}
 
-	@PostMapping("/items/new")
+//	@PostMapping("/items/new")
 	public String create(Model model,
 						 @ModelAttribute BookForm form,
 						 BindingResult bindingResult,
 						 RedirectAttributes redirectAttributes) {
 		itemValidator.validate(form, bindingResult);
 
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("form", form);
+			return "items/v2/createItemForm";
+		}
+
+		Book book = new Book();
+		book.setName(form.getName());
+		book.setPrice(form.getPrice());
+		book.setStockQty(form.getStockQty());
+		book.setAuthor(form.getAuthor());
+		book.setIsbn(form.getIsbn());
+		book.setOpen(form.isOpen());
+		book.setDeliveryCode(form.getDeliveryCode());
+
+		itemService.saveItem(book);
+		return "redirect:/";
+	}
+
+	@PostMapping("/items/new")
+	public String createV6(Model model,
+						 @Validated @ModelAttribute BookForm form,
+						 BindingResult bindingResult,
+						 RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("form", form);
 			return "items/v2/createItemForm";
