@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.mocadev.jpabook.jpashop.utils.ItemValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +36,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ItemControllerV2 {
 
 	private final ItemService itemService;
+	private final ItemValidator itemValidator;
 
 	@ModelAttribute("regions")
 	public Map<String, String> regions() {
@@ -69,9 +72,7 @@ public class ItemControllerV2 {
 						 @ModelAttribute BookForm form,
 						 BindingResult bindingResult,
 						 RedirectAttributes redirectAttributes) {
-		if (!StringUtils.hasText(form.getName())) {
-			bindingResult.addError(new FieldError("form", "name", "상품이름은 필수입니다."));
-		}
+		itemValidator.validate(form, bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("form", form);
