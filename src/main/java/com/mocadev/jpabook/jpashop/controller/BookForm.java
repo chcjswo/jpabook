@@ -4,6 +4,11 @@ import com.mocadev.jpabook.jpashop.domain.item.ItemType;
 import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author chcjswo
@@ -15,9 +20,18 @@ import lombok.Setter;
 public class BookForm {
 
 	private Long id;
+
+	@NotBlank
 	private String name;
-	private int price;
-	private int stockQty;
+
+	@NotNull
+	@Range(min = 1000, max = 100000)
+	private Integer price;
+
+	@NotNull
+	@Max(9999)
+	private Integer stockQty;
+
 	private String author;
 	private String isbn;
 	private boolean open;
