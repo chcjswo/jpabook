@@ -36,11 +36,6 @@ public class ItemControllerV2 {
 	private final ItemService itemService;
 	private final ItemValidator itemValidator;
 
-	@InitBinder
-	public void init(WebDataBinder dataBinder) {
-		dataBinder.addValidators(itemValidator);
-	}
-
 	@ModelAttribute("regions")
 	public Map<String, String> regions() {
 		Map<String, String> regions = new LinkedHashMap<>();
