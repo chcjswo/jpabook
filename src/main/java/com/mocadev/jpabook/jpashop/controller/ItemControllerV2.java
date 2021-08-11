@@ -1,9 +1,6 @@
 package com.mocadev.jpabook.jpashop.controller;
 
-import com.mocadev.jpabook.jpashop.domain.item.Book;
-import com.mocadev.jpabook.jpashop.domain.item.DeliveryCode;
-import com.mocadev.jpabook.jpashop.domain.item.Item;
-import com.mocadev.jpabook.jpashop.domain.item.ItemType;
+import com.mocadev.jpabook.jpashop.domain.item.*;
 import com.mocadev.jpabook.jpashop.service.ItemService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,7 +89,7 @@ public class ItemControllerV2 {
 
 	@PostMapping("/items/new")
 	public String createV6(Model model,
-						 @Validated @ModelAttribute BookForm form,
+						 @Validated(SaveCheck.class) @ModelAttribute BookForm form,
 						 BindingResult bindingResult,
 						 RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {

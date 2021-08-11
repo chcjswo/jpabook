@@ -2,6 +2,9 @@ package com.mocadev.jpabook.jpashop.controller;
 
 import com.mocadev.jpabook.jpashop.domain.item.ItemType;
 import java.util.Map;
+
+import com.mocadev.jpabook.jpashop.domain.item.SaveCheck;
+import com.mocadev.jpabook.jpashop.domain.item.UpdateCheck;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
@@ -19,9 +22,10 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class BookForm {
 
+	@NotNull(groups = UpdateCheck.class)
 	private Long id;
 
-	@NotBlank
+	@NotBlank(groups = {SaveCheck.class, UpdateCheck.class})
 	private String name;
 
 	@NotNull
