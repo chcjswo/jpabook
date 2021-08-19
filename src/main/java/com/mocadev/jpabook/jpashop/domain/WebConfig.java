@@ -1,6 +1,7 @@
 package com.mocadev.jpabook.jpashop.domain;
 
 import com.mocadev.jpabook.jpashop.web.filter.LogFilter;
+import com.mocadev.jpabook.jpashop.web.filter.LoginCheckFilter;
 import javax.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,15 @@ public class WebConfig {
 	public FilterRegistrationBean logFilter() {
 		FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
 		filterFilterRegistrationBean.setFilter(new LogFilter());
+		filterFilterRegistrationBean.setOrder(1);
+		filterFilterRegistrationBean.addUrlPatterns("/*");
+		return filterFilterRegistrationBean;
+	}
+
+	@Bean
+	public FilterRegistrationBean loginCheckFilter() {
+		FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
+		filterFilterRegistrationBean.setFilter(new LoginCheckFilter());
 		filterFilterRegistrationBean.setOrder(1);
 		filterFilterRegistrationBean.addUrlPatterns("/*");
 		return filterFilterRegistrationBean;
