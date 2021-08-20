@@ -3,6 +3,7 @@ package com.mocadev.jpabook.jpashop.domain;
 import com.mocadev.jpabook.jpashop.web.filter.LogFilter;
 import com.mocadev.jpabook.jpashop.web.filter.LoginCheckFilter;
 import com.mocadev.jpabook.jpashop.web.interceptor.LogInInterceptor;
+import com.mocadev.jpabook.jpashop.web.interceptor.LoginCheckInterceptor;
 import javax.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,12 @@ public class WebConfig implements WebMvcConfigurer {
 			.order(1)
 			.addPathPatterns("/**")
 			.excludePathPatterns("/css/**", "/*.ico", "/error");
+
+		registry.addInterceptor(new LoginCheckInterceptor())
+			.order(2)
+			.addPathPatterns("/**")
+			.excludePathPatterns("/", "/members/add", "/login", "/logout",
+				"/css/**", "/*.ico", "/error");
 	}
 
 //	@Bean
