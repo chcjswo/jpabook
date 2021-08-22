@@ -25,3 +25,7 @@ logging:
         org.hibernate.SQL: debug
         org.apache.coyote.http11: debug
 #    org.hibernate.type: trace
+server:
+    error:
+        whitelabel:
+            enabled: false
