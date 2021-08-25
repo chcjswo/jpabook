@@ -1,10 +1,13 @@
 package com.mocadev.jpabook.jpashop.domain;
 
+import com.mocadev.jpabook.jpashop.exception.handler.MyHandlerExceptionResolver;
 import com.mocadev.jpabook.jpashop.web.filter.LogFilter;
 import com.mocadev.jpabook.jpashop.web.filter.LoginCheckFilter;
+import java.util.List;
 import javax.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -48,6 +51,12 @@ public class WebConfig implements WebMvcConfigurer {
 		filterFilterRegistrationBean.setOrder(1);
 		filterFilterRegistrationBean.addUrlPatterns("/*");
 		return filterFilterRegistrationBean;
+	}
+
+	@Override
+	public void extendHandlerExceptionResolvers(
+		List<HandlerExceptionResolver> resolvers) {
+		resolvers.add(new MyHandlerExceptionResolver());
 	}
 
 }
