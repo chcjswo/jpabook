@@ -31,7 +31,7 @@ public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
 				String accept = request.getHeader("accept");
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
-				if ("application.json".equals(accept)) {
+				if ("application/json".equals(accept)) {
 
 				}
 			}
