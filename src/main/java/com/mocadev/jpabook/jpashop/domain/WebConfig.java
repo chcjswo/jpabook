@@ -2,6 +2,7 @@ package com.mocadev.jpabook.jpashop.domain;
 
 import com.mocadev.jpabook.jpashop.exception.handler.MyHandlerExceptionResolver;
 import com.mocadev.jpabook.jpashop.typeconverter.converter.IntegerToStringConverter;
+import com.mocadev.jpabook.jpashop.typeconverter.converter.IpPortToStringConverter;
 import com.mocadev.jpabook.jpashop.typeconverter.converter.StringToIntegerConverter;
 import com.mocadev.jpabook.jpashop.typeconverter.converter.StringToIpPortConverter;
 import com.mocadev.jpabook.jpashop.web.filter.LogFilter;
@@ -68,6 +69,7 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addConverter(new StringToIntegerConverter());
 		registry.addConverter(new IntegerToStringConverter());
 		registry.addConverter(new StringToIpPortConverter());
+		registry.addConverter(new IpPortToStringConverter());
 	}
 
 }
