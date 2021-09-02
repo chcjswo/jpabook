@@ -29,3 +29,6 @@ server:
     error:
         whitelabel:
             enabled: false
+
+file:
+    dir: E:\file\
